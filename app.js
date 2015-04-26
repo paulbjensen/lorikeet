@@ -11,6 +11,7 @@ var userInterface 	= require('./userInterface');
 // Loads the folder
 //
 function loadFolder (folderPath) {
+
 	userInterface.clearMainArea();
 	search.resetIndex();
 	userInterface.updateCurrentFolder(folderPath);
@@ -30,6 +31,7 @@ function loadFolder (folderPath) {
 		}
 
 	});
+	userInterface.bindCurrentFolderPath(loadFolder);
 
 }
 

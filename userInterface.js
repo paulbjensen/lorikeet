@@ -1,13 +1,36 @@
 'use strict';
 
 
+// Dependencies
+//
+var path = require('path');
+
+
 // Insert's the current folder 
 // into the current folder UI element
 //
 // @param 	folderPath 	String 	The path of the folder
 //
 function updateCurrentFolder (folderPath) {
-	window.document.getElementById('current-folder').innerText = folderPath;
+	window.$('#current-folder').html(convertFolderPathIntoLinks(folderPath));
+}
+
+
+// Converts a string into a collection of links
+//
+// @param 	folderPath 	String 	The path of the folder
+//
+function convertFolderPathIntoLinks (folderPath) {
+
+	var folders 		= folderPath.split(path.sep);
+	var contents 		= [];
+	var pathAtFolder 	= '';
+	folders.forEach(function (folder) {
+		pathAtFolder += folder + path.sep;
+		contents.push('<span class="path" data-path="' + pathAtFolder.slice(0,-1) + '">' + folder + '</span>'); 
+	});
+	return contents.join(path.sep).toString();
+
 }
 
 
@@ -52,12 +75,24 @@ function bindSearchField (cb) {
 }
 
 
+// Binds the clickable folders in the current folder path area
+//
+// @param 	cb 		{Function} 		The function to execute on the folder path
+//
+function bindCurrentFolderPath (cb) {
+	window.$('span.path').on('click', function (event) {
+		var folderPath = window.$(event.target).attr('data-path');
+		cb(folderPath);
+	});
+}
+
+
 // Filters the results in the main area
 //
 // @param 	results 	{Array}		The list of results
 //
 function filterResults (results) {
-	var validFilePaths = results.map(function (result) { return result.ref });
+	var validFilePaths = results.map(function (result) { return result.ref; });
 	window.$('.item').each(function (index, item) {
 		var filePath = window.$(window.$(item).find('img')).attr('data-filePath');
 		if (validFilePaths.indexOf(filePath) !== -1) {
@@ -83,6 +118,7 @@ module.exports = {
 	makeFoldersClickable	: makeFoldersClickable,
 	clearMainArea 			: clearMainArea,
 	bindSearchField 		: bindSearchField,
+	bindCurrentFolderPath 	: bindCurrentFolderPath,
 	filterResults			: filterResults,
 	resetFilter 			: resetFilter
 };
