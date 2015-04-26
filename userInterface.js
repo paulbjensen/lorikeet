@@ -42,6 +42,7 @@ function addFileToMainArea (file) {
 	var mainArea = window.document.getElementById('main-area');
 	var template = window.document.querySelector('#item-template');
 	template.content.querySelector('img').src = 'images/' + file.type + '.svg';
+	template.content.querySelector('img').className = 'icon';
 	template.content.querySelector('img').classList.add(file.type);
 	template.content.querySelector('img').setAttribute('data-filePath',file.path);
 	template.content.querySelector('.filename').innerText = file.file;
@@ -58,6 +59,14 @@ function makeFoldersClickable (cb) {
 	window.$('.directory').on('dblclick', cb);
 }
 
+
+// Makes the files clickable
+//
+// @param 	cb 		{Function} 		The function to execute when the double-click happens
+//
+function makeFilesClickable (cb) {
+	window.$('.file').on('dblclick', cb);
+}
 
 // Clears the main area of any content
 //
@@ -116,6 +125,7 @@ module.exports = {
 	addFileToMainArea 		: addFileToMainArea, 
 	updateCurrentFolder 	: updateCurrentFolder,
 	makeFoldersClickable	: makeFoldersClickable,
+	makeFilesClickable 		: makeFilesClickable,
 	clearMainArea 			: clearMainArea,
 	bindSearchField 		: bindSearchField,
 	bindCurrentFolderPath 	: bindCurrentFolderPath,
