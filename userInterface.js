@@ -68,6 +68,7 @@ function makeFilesClickable (cb) {
 	window.$('.file').on('dblclick', cb);
 }
 
+
 // Clears the main area of any content
 //
 function clearMainArea () {
@@ -118,6 +119,7 @@ function filterResults (results) {
 function resetFilter () {
 	window.$('.item').show();
 }
+
 
 // Expose the functions as the public API
 //
