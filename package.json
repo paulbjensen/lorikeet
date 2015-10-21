@@ -4,7 +4,7 @@
   "main": "index.html",
   "window": {
     "icon": "icon.icns",
-    "toolbar": false,
+    "toolbar": true,
     "width": 750,
     "height": 550
   },
