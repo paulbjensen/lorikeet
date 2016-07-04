@@ -3,8 +3,10 @@
 
 // Dependencies
 //
-var assert 				= require('assert');
-var wd 					= require('wd');
+var assert 						= require('assert');
+var path							= require('path');
+var wd 								= require('wd');
+var nw								= require('nw');
 var WebdriverManager 	= require('webdriver-manager');
 
 describe('app', function () {
@@ -16,7 +18,6 @@ describe('app', function () {
 			describe('when searching for a file', function () {
 
 				var wm, browser;
-
 				before(function (done) {
 					this.timeout(20000);
 					wm = new WebdriverManager();
@@ -24,10 +25,10 @@ describe('app', function () {
 						if (err) { return done(err); }
 						browser = wd.remote();
 						browser.init({
-						    browserName: 'chrome',
-						    chromeOptions: {
-						        binary: '/Users/pauljensen/.nvm/versions/node/v4.0.0/bin/nw'
-						    }
+						  browserName: 'chrome',
+						  chromeOptions: {
+						    binary: path.join(__dirname, '../node_modules/.bin/nw')
+						  }
 						}, done);
 					});
 

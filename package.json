@@ -8,6 +8,9 @@
     "width": 750,
     "height": 550
   },
+  "scripts": {
+    "test": "node_modules/.bin/mocha"
+  },
   "dependencies": {
     "async": "^0.9.0",
     "bower": "^1.4.1",
@@ -17,6 +20,7 @@
     "chromedriver": "^2.19.0",
     "cucumber": "^0.7.0",
     "mocha": "^2.3.3",
+    "nw": "^0.12.3",
     "wd": "^0.3.12",
     "webdriver-manager": "^7.0.1"
   }
